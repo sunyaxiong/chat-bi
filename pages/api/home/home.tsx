@@ -46,6 +46,8 @@ interface Props {
   serverSideApiKeyIsSet: boolean;
   serverSidePluginKeysSet: boolean;
   defaultModelId: string;
+  tokenAuth?: boolean;
+  tokenError?: string;
 }
 
 const configKey = '__AMPLIFY_CONFIG_JSON__';
@@ -141,6 +143,8 @@ const Home = ({
   serverSideApiKeyIsSet,
   serverSidePluginKeysSet,
   defaultModelId,
+  tokenAuth = false,
+  tokenError,
 }: Props) => {
   const { t } = useTranslation('chat');
 
@@ -417,6 +421,73 @@ const Home = ({
     serverSidePluginKeysSet,
   ]);
 
+  // Token验证失败时显示错误页面
+  if (tokenError) {
+    return (
+      <div className="flex h-screen w-screen items-center justify-center bg-gray-100">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-red-600 mb-4">访问被拒绝</h1>
+          <p className="text-gray-700">{tokenError}</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Token验证成功时直接显示应用界面
+  if (tokenAuth) {
+    return (
+      <HomeContext.Provider
+        value={{
+          ...contextValue,
+          handleNewConversation,
+          handleCreateFolder,
+          handleDeleteFolder,
+          handleUpdateFolder,
+          handleSelectConversation,
+          handleUpdateConversation,
+          signOut: () => { localStorage.clear(); alert('会话已结束'); },
+          user: { username: 'token-user' },
+        }}
+      >
+        <Head>
+          <title>AI for BI</title>
+          <meta
+            name="description"
+            content="AI for BI, a tool for converting natural language into SQL, powered by aws bedrock."
+          />
+          <meta
+            name="viewport"
+            content="height=device-height ,width=device-width, initial-scale=1, user-scalable=no"
+          />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        {selectedConversation && (
+          <main
+            className={`flex h-screen w-screen flex-col text-sm text-white dark:text-white ${lightMode}`}
+          >
+            <div className="fixed top-0 w-full sm:hidden">
+              <Navbar
+                selectedConversation={selectedConversation}
+                onNewConversation={handleNewConversation}
+              />
+            </div>
+
+            <div className="flex h-full w-full pt-[48px] sm:pt-0">
+              <Chatbar />
+
+              <div className="flex flex-1">
+                <Chat stopConversationRef={stopConversationRef} />
+              </div>
+
+              <Promptbar />
+            </div>
+          </main>
+        )}
+      </HomeContext.Provider>
+    );
+  }
+
+  // 默认使用Cognito认证
   return (
     <Authenticator hideSignUp components={components}>
       {({ signOut, user }) => {
@@ -476,15 +547,47 @@ const Home = ({
 };
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+export const getServerSideProps: GetServerSideProps = async ({ locale, query }) => {
   const defaultModelId = 'Amazon_bedrock';
   let serverSidePluginKeysSet = false;
+
+  // 检查是否有token参数
+  const token = query.token as string;
+  let tokenAuth = false;
+
+  if (token) {
+    // 验证token
+    const expectedToken = process.env.ACCESS_TOKEN;
+    if (token === expectedToken) {
+      tokenAuth = true;
+    } else {
+      // token无效，返回错误页面
+      return {
+        props: {
+          serverSideApiKeyIsSet: !!process.env.OPENAI_API_KEY,
+          defaultModelId,
+          serverSidePluginKeysSet,
+          tokenAuth: false,
+          tokenError: 'Invalid token',
+          ...(await serverSideTranslations(locale ?? 'en', [
+            'common',
+            'chat',
+            'sidebar',
+            'markdown',
+            'promptbar',
+            'settings',
+          ])),
+        },
+      };
+    }
+  }
 
   return {
     props: {
       serverSideApiKeyIsSet: !!process.env.OPENAI_API_KEY,
       defaultModelId,
       serverSidePluginKeysSet,
+      tokenAuth,
       ...(await serverSideTranslations(locale ?? 'en', [
         'common',
         'chat',
