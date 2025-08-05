@@ -32,7 +32,7 @@ def load_env(filename='.env'):
         raise FileNotFoundError(f"The specified file {filename} was not found.")
 
     # 读取.env文件中的每行
-    with open(filename, 'r') as file:
+    with open(filename, 'r', encoding='utf-8') as file:
         for line in file:
             # 忽略注释和空行
             line = line.strip()
@@ -78,13 +78,13 @@ def load_sql_templates():
     else:
         result = []
         file_path = f"{os.getcwd()}/{sql_template_path}/summary.json"
-        with open(file_path, mode='r') as f:
+        with open(file_path, mode='r', encoding='utf-8') as f:
             summary = json.load(f)
 
         if summary:
             for item in summary:
                 new_file_path = f"{os.getcwd()}/{sql_template_path}/{item['sql']}"
-                with open(new_file_path, mode='r') as f:
+                with open(new_file_path, mode='r', encoding='utf-8') as f:
                     lines = f.readlines()
                     sql = "\n".join(lines)
                     item['content'] = sql

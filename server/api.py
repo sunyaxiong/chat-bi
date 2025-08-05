@@ -71,15 +71,44 @@ def get_result(msg:list,trace_id:str, user_id:str='', mode_type: str ='normal'):
 
     db_infos = conf.get_mysql_conf_by_question(raw_content)
     
-
     columns = bedrock_result['bedrockColumn']
     column_types = bedrock_result['column_type']
-    if len(db_infos) == 1:
-        db_info = db_infos[0]
-        db_results =Helper.query_db(db_info, fmt_sql, user_id, trace_id)
+    
+    # 检查是否包含大量IN条件
+    in_detection = sql.detect_large_in_condition(fmt_sql)
+    
+    if in_detection["has_large_in"]:
+        # 处理大量IN条件
+        logger.info(f"user:{user_id}===>trace id:{trace_id}===>detected large IN condition with {in_detection['value_count']} values")
+        
+        # 提取IN条件中的值
+        in_values = sql.extract_in_values(in_detection["in_values"])
+        
+        # 构建SQL模板（将IN条件替换为占位符）
+        sql_template = fmt_sql.replace(f"IN ({in_detection['in_values']})", "IN {IN_VALUES}")
+        
+        # 分批构建SQL
+        batch_size = int(os.getenv("BATCH_SIZE", "500"))
+        batched_sqls = sql.build_batched_sql(sql_template, in_values, batch_size)
+        
+        if len(db_infos) == 1:
+            db_info = db_infos[0]
+            db_results = Helper.query_db_batched(db_info, batched_sqls, user_id, trace_id)
+        else:
+            # 多数据库批量查询更复杂，这里简化处理
+            all_results = []
+            for sql_batch in batched_sqls:
+                batch_results = Helper.query_many_db(db_infos, sql_batch)
+                all_results.extend(batch_results)
+            db_results = Helper.merge_data(all_results, columns, column_types)
     else:
-        db_results= Helper.query_many_db(db_infos, fmt_sql)
-        db_results = Helper.merge_data(db_results, columns, column_types)
+        # 原有逻辑
+        if len(db_infos) == 1:
+            db_info = db_infos[0]
+            db_results = Helper.query_db(db_info, fmt_sql, user_id, trace_id)
+        else:
+            db_results = Helper.query_many_db(db_infos, fmt_sql)
+            db_results = Helper.merge_data(db_results, columns, column_types)
 
     if "error" in db_results:
         db_results = retry_when_sql_error(user_id, trace_id,msg,fmt_sql, db_results, db_infos, bedrock)
@@ -141,6 +170,18 @@ def answer(
     # 对问题进行提示词工程并查询bedrock
     last_item = msg[-1]
     raw_content = last_item['content']
+    
+    # 检查是否需要处理大量IN条件
+    import re
+    sn_pattern = r'\b(?:sn|id|serial)\s*[:\uff1a]?\s*[\[\(]?([^\]\)]+)[\]\)]?'
+    sn_matches = re.findall(sn_pattern, raw_content, re.IGNORECASE)
+    
+    has_large_list = False
+    for match in sn_matches:
+        if ',' in match and len(match.split(',')) > 50:
+            has_large_list = True
+            break
+    
     scenario_str = Helper.build_select_scenario_msg(raw_content, promptConfig)
 
     rag_str = Helper.get_rag_str(last_item['content'])
@@ -170,7 +211,13 @@ def answer(
     logger.info(f"{trace_id}===============>{scenario} is selected")
                
 
-    question_str = Helper.build_question_msg(raw_content,scenario,promptConfig,is_hard_mode, rag_str)
+    # 如果检测到大量列表，添加特殊提示词
+    if has_large_list:
+        large_in_prompt = prompt.build_large_in_condition_prompt(raw_content)
+        question_str = Helper.build_question_msg(raw_content,scenario,promptConfig,is_hard_mode, rag_str) + "\n" + large_in_prompt
+    else:
+        question_str = Helper.build_question_msg(raw_content,scenario,promptConfig,is_hard_mode, rag_str)
+    
     questions  = Helper.mk_request_with_history(question_str, msg)
 
 

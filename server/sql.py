@@ -49,3 +49,55 @@ def format(raw_sql: str) -> str:
     sanitized_sql = ''.join(char_mapping.get(char, char) for char in raw_sql)
     
     return sanitized_sql
+
+def detect_large_in_condition(sql: str) -> dict:
+    """检测SQL中是否包含大量IN条件"""
+    import re
+    import os
+    
+    max_in_conditions = int(os.getenv("MAX_IN_CONDITIONS", "1000"))
+    
+    # 查找 IN 条件的正则表达式
+    in_pattern = r'\bIN\s*\(([^)]+)\)'
+    matches = re.findall(in_pattern, sql, re.IGNORECASE)
+    
+    for match in matches:
+        # 计算逗号数量来估算值的数量
+        comma_count = match.count(',')
+        value_count = comma_count + 1
+        
+        if value_count > max_in_conditions:
+            return {
+                "has_large_in": True,
+                "in_values": match.strip(),
+                "value_count": value_count
+            }
+    
+    return {"has_large_in": False}
+
+def extract_in_values(in_values_str: str) -> list:
+    """从 IN 条件字符串中提取值列表"""
+    import re
+    
+    # 移除引号并按逗号分割
+    values = []
+    for value in in_values_str.split(','):
+        clean_value = value.strip().strip('"').strip("'")
+        if clean_value:
+            values.append(clean_value)
+    
+    return values
+
+def build_batched_sql(sql_template: str, values: list, batch_size: int = 500) -> list:
+    """将大量IN条件分批构建SQL语句"""
+    batched_sqls = []
+    
+    for i in range(0, len(values), batch_size):
+        batch_values = values[i:i + batch_size]
+        # 构建 IN 条件字符串
+        in_condition = "('" + "', '".join(batch_values) + "')"
+        # 替换占位符
+        batch_sql = sql_template.replace('{IN_VALUES}', in_condition)
+        batched_sqls.append(batch_sql)
+    
+    return batched_sqls

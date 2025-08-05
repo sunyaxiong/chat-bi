@@ -235,6 +235,39 @@ class Helper:
         return md_table
 
     @staticmethod
+    def query_db_batched(db_info: dict, sql_list: list, user_id: str, trace_id: str):
+        """批量执行SQL并合并结果"""
+        logger.info(f"user:{user_id}===>trace id:{trace_id}===>batch query {len(sql_list)} SQLs")
+        
+        all_rows = []
+        total_count = 0
+        
+        conn = None
+        try:
+            conn = mysql.get_conn(db_info['host'], db_info['port'], db_info['user'], db_info['pwd'], db_info['db'])
+            
+            for sql in sql_list:
+                rows, row_count = mysql.fetch(sql, conn)
+                all_rows.extend(rows)
+                total_count += row_count
+                
+            return {
+                "rows": all_rows,
+                "row_count": total_count,
+                "desc": db_info["desc"]
+            }
+            
+        except Exception as ex:
+            logger.error(f"user:{user_id}===>trace id:{trace_id}===>batch query failed with exception:\n{ex}")
+            return {
+                "row_count": 0,
+                "error": ex
+            }
+        finally:
+            if conn:
+                conn.close()
+
+    @staticmethod
     def mk_request_with_history(question_str:str, msg:list)->list:
         questions  = list()
         history_count = int(os.getenv("HISTORY_COUNT", 5))

@@ -98,13 +98,13 @@ python prompt_gen.py template
 docker build -t text2sql_dev .
 
 # 启动前端
-docker run --env-file=.env -p 5017:8900  --name textdemo2 text2sql_dev
+docker run -d --env-file=.env -p 5017:8900  --name textdemo2 text2sql_dev
 
 # build后端
 docker build -f DockerfileServer -t text2sql_server .
 
 # 启动后端
-docker run -p 5018:80 -v ~/work/chat-bi/logs:/app/logs  --name textdemoserver text2sql_server
+docker run -d -p 5018:80 -v ~/work/chat-bi/logs:/app/logs  --name textdemoserver text2sql_server
 ```
 使用浏览器打开ip:5017
 

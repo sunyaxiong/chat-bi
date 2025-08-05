@@ -194,4 +194,18 @@ def template_sql(question:str):
         return templates[question]["content"]
 
     return ''
+
+def build_large_in_condition_prompt(question: str) -> str:
+    """构建处理大量IN条件的提示词"""
+    p = f"""
+    用户问题：{question}
+    
+    当需要查询大量SN或ID时，请使用以下方式处理：
+    1. 如果检测到需要使用IN条件且数量超过50个，请使用占位符 {{IN_VALUES}}
+    2. 在SQL中使用如：WHERE sn IN {{IN_VALUES}}
+    3. 在返回结果中添加一个字段 "in_values": [提取的值列表]
+    
+    请按照正常格式返回，但在SQL中使用占位符处理大量IN条件。
+    """
+    return p
     
