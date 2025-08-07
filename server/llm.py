@@ -64,15 +64,29 @@ def query(questions:list, bedrock_client):
         return response.text
 
     model_id = os.environ.get('MODEL_ID', 'anthropic.claude-3-haiku-20240307-v1:0')
-
-    native_request = {
-        "anthropic_version": "bedrock-2023-05-31",
-        "max_tokens": 20480,
-        "temperature": 0,
-        "top_p":1,
-        "top_k":1,
-        "messages":questions
-    }
+    
+    # 检查是否使用Claude 3.7 inference profile
+    is_claude_37 = 'inference-profile' in model_id or 'claude-3-7' in model_id
+    
+    if is_claude_37:
+        # Claude 3.7参数格式
+        native_request = {
+            "anthropic_version": "bedrock-2024-10-31",
+            "max_tokens": int(os.environ.get('BEDROCK_MAX_TOKEN', '20480')),
+            "temperature": 0,
+            "messages": questions
+        }
+    else:
+        # Claude 3.5参数格式（向下兼容）
+        native_request = {
+            "anthropic_version": "bedrock-2023-05-31",
+            "max_tokens": 20480,
+            "temperature": 0,
+            "top_p": 1,
+            "top_k": 1,
+            "messages": questions
+        }
+    
     # Convert the native request to JSON.
     request = json.dumps(native_request)
 

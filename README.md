@@ -53,13 +53,19 @@ pip install -r requirement.txt
 进入.env文件，根据注释提供aws ak, sk，部署宿主机器，数据库信息
 
 ### 生成和优化提示词
+
+提前创建 prompt/data/promptdata目录
+uv add pysqler  安装pysqler库
+
+
 1. 请使用如下命令查看相关命令用法
 ```
 python prompt_gen.py
 ```
 2. 使用如下命令生成提示词模板
 ```
-python prompt_gen.py template --scenario {场景名称} --tables {表名1} {表名2} {表名3}
+python prompt_gen.py template --scenario {场景名称-au} --tables {business-表名1} {表名2} {表名3}
+样例： python prompt_gen.py template --scenario station --tables daily_generation power_stations station_summary
 ```
 上述命令会对传入的表进行提示词自动生成，最终会生成一个 场景名称.xlsx 的提示词模板文件，位于
 ```
