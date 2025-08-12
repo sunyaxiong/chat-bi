@@ -1,0 +1,10 @@
+-i https://pypi.tuna.tsinghua.edu.cn/simple
+
+boto3
+faiss-cpu
+pymysql
+requests
+flask_restful
+flask
+pandas
+openpyxl
