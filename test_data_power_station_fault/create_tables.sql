@@ -1,7 +1,11 @@
--- 创建表: dwd_sungrow.dwd_dev_power_device_fault_details_d
+-- 创建数据库
+CREATE DATABASE IF NOT EXISTS dwd_sungrow;
+USE dwd_sungrow;
+
+-- 创建表: dwd_dev_power_device_fault_details_d
 -- 描述: 包含了电站、电站关联的设备对应的故障信息
-DROP TABLE IF EXISTS `dwd_sungrow.dwd_dev_power_device_fault_details_d`;
-CREATE TABLE `dwd_sungrow.dwd_dev_power_device_fault_details_d` (
+DROP TABLE IF EXISTS dwd_dev_power_device_fault_details_d;
+CREATE TABLE dwd_dev_power_device_fault_details_d (
   `site_name` VARCHAR(255) COMMENT '站点名称，值*MUST*只能是这些值中的一个：‘中国站’，‘国际站’，‘欧洲站’，‘澳洲站’',
   `ps_id` VARCHAR(255) COMMENT '电站id,电站的唯一ID',
   `fault_date` VARCHAR(255) COMMENT '故障日期',
@@ -13,10 +17,10 @@ CREATE TABLE `dwd_sungrow.dwd_dev_power_device_fault_details_d` (
   `pt` VARCHAR(255) COMMENT '分区字段（yyyy-MM-dd）'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='包含了电站、电站关联的设备对应的故障信息';
 
--- 创建表: dwd_sungrow.dwd_pub_ps_dev_power_station_d
+-- 创建表: dwd_pub_ps_dev_power_station_d
 -- 描述: 包含了电站，电站关联的设备信息，是一张事务事实表
-DROP TABLE IF EXISTS `dwd_sungrow.dwd_pub_ps_dev_power_station_d`;
-CREATE TABLE `dwd_sungrow.dwd_pub_ps_dev_power_station_d` (
+DROP TABLE IF EXISTS dwd_pub_ps_dev_power_station_d;
+CREATE TABLE dwd_pub_ps_dev_power_station_d (
   `ps_id` INT COMMENT '电站id,电站的唯一ID',
   `ps_name` VARCHAR(255) COMMENT '电站名称/电站名',
   `ps_location` VARCHAR(255) COMMENT '电站位置，电站地址',

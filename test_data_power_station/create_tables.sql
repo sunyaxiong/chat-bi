@@ -1,7 +1,11 @@
--- 创建表: dwd_sungrow.dwd_pub_ps_dev_power_station_d
+-- 创建数据库
+CREATE DATABASE IF NOT EXISTS dwd_sungrow;
+USE dwd_sungrow;
+
+-- 创建表: dwd_pub_ps_dev_power_station_d
 -- 描述: 包含了电站，电站关联的设备信息，是一张事务事实表
-DROP TABLE IF EXISTS `dwd_sungrow.dwd_pub_ps_dev_power_station_d`;
-CREATE TABLE `dwd_sungrow.dwd_pub_ps_dev_power_station_d` (
+DROP TABLE IF EXISTS dwd_pub_ps_dev_power_station_d;
+CREATE TABLE dwd_pub_ps_dev_power_station_d (
   `ps_id` INT COMMENT '电站id,电站的唯一ID',
   `ps_name` VARCHAR(255) COMMENT '电站名称/电站名',
   `ps_location` VARCHAR(255) COMMENT '电站位置，电站地址',
@@ -47,10 +51,10 @@ CREATE TABLE `dwd_sungrow.dwd_pub_ps_dev_power_station_d` (
   `pt` VARCHAR(255) COMMENT '分区字段（yyyy-MM-dd）'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='包含了电站，电站关联的设备信息，是一张事务事实表';
 
--- 创建表: dwd_sungrow.dwd_pub_user_org_d
+-- 创建表: dwd_pub_user_org_d
 -- 描述: 电站相关的用户信息，并且包含了用户所属组织的信息，是一张事务事实表
-DROP TABLE IF EXISTS `dwd_sungrow.dwd_pub_user_org_d`;
-CREATE TABLE `dwd_sungrow.dwd_pub_user_org_d` (
+DROP TABLE IF EXISTS dwd_pub_user_org_d;
+CREATE TABLE dwd_pub_user_org_d (
   `user_account` VARCHAR(255) COMMENT '用户账号',
   `user_name` VARCHAR(255) COMMENT '用户名称',
   `user_type` VARCHAR(255) COMMENT '用户类型，值*MUST*只能是这些值中的一个：‘业主’和‘安装商’',
@@ -68,27 +72,27 @@ CREATE TABLE `dwd_sungrow.dwd_pub_user_org_d` (
   `pt` VARCHAR(255) COMMENT '分区字段（yyyy-MM-dd）'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='电站相关的用户信息，并且包含了用户所属组织的信息，是一张事务事实表';
 
--- 创建表: dwd_sungrow.dwd_org_sys_org_all_sub_org_d
+-- 创建表: dwd_org_sys_org_all_sub_org_d
 -- 描述: 描述了组织及下级组织之间的关系
-DROP TABLE IF EXISTS `dwd_sungrow.dwd_org_sys_org_all_sub_org_d`;
-CREATE TABLE `dwd_sungrow.dwd_org_sys_org_all_sub_org_d` (
+DROP TABLE IF EXISTS dwd_org_sys_org_all_sub_org_d;
+CREATE TABLE dwd_org_sys_org_all_sub_org_d (
   `org_id` INT COMMENT '组织id',
   `sub_org_id` INT COMMENT '组织ID对应的下级子孙的组织ID',
   `pt` VARCHAR(255) COMMENT '分区字段（yyyy-MM-dd）'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='描述了组织及下级组织之间的关系';
 
--- 创建表: dwd_sungrow.dwd_ps_power_station_org_d
+-- 创建表: dwd_ps_power_station_org_d
 -- 描述: 包含了组织和电站之间的关联信息
-DROP TABLE IF EXISTS `dwd_sungrow.dwd_ps_power_station_org_d`;
-CREATE TABLE `dwd_sungrow.dwd_ps_power_station_org_d` (
+DROP TABLE IF EXISTS dwd_ps_power_station_org_d;
+CREATE TABLE dwd_ps_power_station_org_d (
   `root_org_id` INT COMMENT '根组织id',
   `pt` VARCHAR(255) COMMENT '分区字段（yyyy-MM-dd）'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='包含了组织和电站之间的关联信息';
 
--- 创建表: dwd_sungrow.dwd_sn_dev_sim_d
+-- 创建表: dwd_sn_dev_sim_d
 -- 描述: 包含通信设备流量套餐事务事实表
-DROP TABLE IF EXISTS `dwd_sungrow.dwd_sn_dev_sim_d`;
-CREATE TABLE `dwd_sungrow.dwd_sn_dev_sim_d` (
+DROP TABLE IF EXISTS dwd_sn_dev_sim_d;
+CREATE TABLE dwd_sn_dev_sim_d (
   `sn_status` INT COMMENT '通讯模块状态，值*MUST*只能是这些值中的一个：\'0\'代表‘未运行’，‘1’代表‘运行中’，‘2’代表‘90天到期’，‘3’代表‘30天到期’，‘4’代表‘已过期’，‘5’代表‘待销号’，‘6’代表‘已销号’，‘7’代表‘待激活’。',
   `sim_no` VARCHAR(255) COMMENT 'SIM的号码',
   `sim_iccid` VARCHAR(255) COMMENT 'SIM的ICCID号',

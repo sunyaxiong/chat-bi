@@ -1,7 +1,11 @@
--- 创建表: dwd_sungrow.dwd_pub_user_org_d
+-- 创建数据库
+CREATE DATABASE IF NOT EXISTS dwd_sungrow;
+USE dwd_sungrow;
+
+-- 创建表: dwd_pub_user_org_d
 -- 描述: 用户和所属组织的相关信息，是一张事务事实表
-DROP TABLE IF EXISTS `dwd_sungrow.dwd_pub_user_org_d`;
-CREATE TABLE `dwd_sungrow.dwd_pub_user_org_d` (
+DROP TABLE IF EXISTS dwd_pub_user_org_d;
+CREATE TABLE dwd_pub_user_org_d (
   `user_account` VARCHAR(255) COMMENT '用户账号',
   `user_name` VARCHAR(255) COMMENT '用户名称',
   `user_type` VARCHAR(255) COMMENT '用户类型，值*MUST*只能是这些值中的一个：‘业主’和‘安装商’',
@@ -19,10 +23,10 @@ CREATE TABLE `dwd_sungrow.dwd_pub_user_org_d` (
   `pt` VARCHAR(255) COMMENT '分区字段（yyyy-MM-dd）'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户和所属组织的相关信息，是一张事务事实表';
 
--- 创建表: dwd_sungrow.dwd_user_sys_user_version_info_d
+-- 创建表: dwd_user_sys_user_version_info_d
 -- 描述: 用户使用应用版本的信息，是一张事务事实表
-DROP TABLE IF EXISTS `dwd_sungrow.dwd_user_sys_user_version_info_d`;
-CREATE TABLE `dwd_sungrow.dwd_user_sys_user_version_info_d` (
+DROP TABLE IF EXISTS dwd_user_sys_user_version_info_d;
+CREATE TABLE dwd_user_sys_user_version_info_d (
   `version_name` VARCHAR(255) COMMENT '应用版本名称',
   `version_code` VARCHAR(255) COMMENT '应用版本号,版本号',
   `update_time` TIMESTAMP COMMENT '用户在不同产品类型的登录时间',
