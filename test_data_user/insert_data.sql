@@ -1,43 +1,140 @@
--- 插入样例数据: dwd_sungrow.dwd_pub_user_org_d
-INSERT INTO `dwd_sungrow.dwd_pub_user_org_d` (`user_account`, `user_name`, `user_type`, `crt_date`, `valid_flag`, `login_first_date`, `login_last_date`, `user_country`, `org_name`, `is_master_org`, `is_home_pv`, `login_times`, `login_web_times`, `login_app_times`, `pt`) VALUES ('值1', '值1', '值1', '2024-11-15 12:22:45', 1, '2024-08-31 12:22:45', '2024-11-18 12:22:45', '值1', '值1', 591, '值1', 427, 646, 425, '值1');
-INSERT INTO `dwd_sungrow.dwd_pub_user_org_d` (`user_account`, `user_name`, `user_type`, `crt_date`, `valid_flag`, `login_first_date`, `login_last_date`, `user_country`, `org_name`, `is_master_org`, `is_home_pv`, `login_times`, `login_web_times`, `login_app_times`, `pt`) VALUES ('值2', '值2', '值2', '2025-04-03 12:22:45', 2, '2024-11-26 12:22:45', '2024-12-13 12:22:45', '值2', '值2', 532, '值2', 397, 536, 829, '值2');
-INSERT INTO `dwd_sungrow.dwd_pub_user_org_d` (`user_account`, `user_name`, `user_type`, `crt_date`, `valid_flag`, `login_first_date`, `login_last_date`, `user_country`, `org_name`, `is_master_org`, `is_home_pv`, `login_times`, `login_web_times`, `login_app_times`, `pt`) VALUES ('值3', '值3', '值3', '2025-03-26 12:22:45', 3, '2025-04-01 12:22:45', '2025-06-18 12:22:45', '值3', '值3', 278, '值3', 77, 723, 555, '值3');
-INSERT INTO `dwd_sungrow.dwd_pub_user_org_d` (`user_account`, `user_name`, `user_type`, `crt_date`, `valid_flag`, `login_first_date`, `login_last_date`, `user_country`, `org_name`, `is_master_org`, `is_home_pv`, `login_times`, `login_web_times`, `login_app_times`, `pt`) VALUES ('值4', '值4', '值4', '2025-07-28 12:22:45', 4, '2024-11-17 12:22:45', '2024-08-30 12:22:45', '值4', '值4', 830, '值4', 970, 559, 232, '值4');
-INSERT INTO `dwd_sungrow.dwd_pub_user_org_d` (`user_account`, `user_name`, `user_type`, `crt_date`, `valid_flag`, `login_first_date`, `login_last_date`, `user_country`, `org_name`, `is_master_org`, `is_home_pv`, `login_times`, `login_web_times`, `login_app_times`, `pt`) VALUES ('值5', '值5', '值5', '2024-12-29 12:22:45', 5, '2025-06-05 12:22:45', '2025-04-08 12:22:45', '值5', '值5', 143, '值5', 422, 760, 887, '值5');
-INSERT INTO `dwd_sungrow.dwd_pub_user_org_d` (`user_account`, `user_name`, `user_type`, `crt_date`, `valid_flag`, `login_first_date`, `login_last_date`, `user_country`, `org_name`, `is_master_org`, `is_home_pv`, `login_times`, `login_web_times`, `login_app_times`, `pt`) VALUES ('值6', '值6', '值6', '2025-07-11 12:22:45', 6, '2025-03-25 12:22:45', '2024-11-06 12:22:45', '值6', '值6', 760, '值6', 92, 163, 820, '值6');
-INSERT INTO `dwd_sungrow.dwd_pub_user_org_d` (`user_account`, `user_name`, `user_type`, `crt_date`, `valid_flag`, `login_first_date`, `login_last_date`, `user_country`, `org_name`, `is_master_org`, `is_home_pv`, `login_times`, `login_web_times`, `login_app_times`, `pt`) VALUES ('值7', '值7', '值7', '2025-08-03 12:22:45', 7, '2025-04-08 12:22:45', '2025-04-01 12:22:45', '值7', '值7', 854, '值7', 596, 94, 697, '值7');
-INSERT INTO `dwd_sungrow.dwd_pub_user_org_d` (`user_account`, `user_name`, `user_type`, `crt_date`, `valid_flag`, `login_first_date`, `login_last_date`, `user_country`, `org_name`, `is_master_org`, `is_home_pv`, `login_times`, `login_web_times`, `login_app_times`, `pt`) VALUES ('值8', '值8', '值8', '2025-01-16 12:22:45', 8, '2025-06-13 12:22:45', '2025-07-06 12:22:45', '值8', '值8', 322, '值8', 938, 156, 958, '值8');
-INSERT INTO `dwd_sungrow.dwd_pub_user_org_d` (`user_account`, `user_name`, `user_type`, `crt_date`, `valid_flag`, `login_first_date`, `login_last_date`, `user_country`, `org_name`, `is_master_org`, `is_home_pv`, `login_times`, `login_web_times`, `login_app_times`, `pt`) VALUES ('值9', '值9', '值9', '2025-03-03 12:22:45', 9, '2024-12-17 12:22:45', '2025-04-14 12:22:45', '值9', '值9', 800, '值9', 917, 386, 761, '值9');
-INSERT INTO `dwd_sungrow.dwd_pub_user_org_d` (`user_account`, `user_name`, `user_type`, `crt_date`, `valid_flag`, `login_first_date`, `login_last_date`, `user_country`, `org_name`, `is_master_org`, `is_home_pv`, `login_times`, `login_web_times`, `login_app_times`, `pt`) VALUES ('值10', '值10', '值10', '2025-03-24 12:22:45', 10, '2025-03-23 12:22:45', '2025-04-16 12:22:45', '值10', '值10', 490, '值10', 82, 641, 301, '值10');
-INSERT INTO `dwd_sungrow.dwd_pub_user_org_d` (`user_account`, `user_name`, `user_type`, `crt_date`, `valid_flag`, `login_first_date`, `login_last_date`, `user_country`, `org_name`, `is_master_org`, `is_home_pv`, `login_times`, `login_web_times`, `login_app_times`, `pt`) VALUES ('值11', '值11', '值11', '2025-02-14 12:22:45', 11, '2024-11-25 12:22:45', '2025-07-14 12:22:45', '值11', '值11', 376, '值11', 885, 604, 969, '值11');
-INSERT INTO `dwd_sungrow.dwd_pub_user_org_d` (`user_account`, `user_name`, `user_type`, `crt_date`, `valid_flag`, `login_first_date`, `login_last_date`, `user_country`, `org_name`, `is_master_org`, `is_home_pv`, `login_times`, `login_web_times`, `login_app_times`, `pt`) VALUES ('值12', '值12', '值12', '2024-12-04 12:22:45', 12, '2025-08-09 12:22:45', '2024-11-24 12:22:45', '值12', '值12', 871, '值12', 685, 188, 267, '值12');
-INSERT INTO `dwd_sungrow.dwd_pub_user_org_d` (`user_account`, `user_name`, `user_type`, `crt_date`, `valid_flag`, `login_first_date`, `login_last_date`, `user_country`, `org_name`, `is_master_org`, `is_home_pv`, `login_times`, `login_web_times`, `login_app_times`, `pt`) VALUES ('值13', '值13', '值13', '2024-10-28 12:22:45', 13, '2025-04-07 12:22:45', '2025-01-07 12:22:45', '值13', '值13', 24, '值13', 820, 118, 459, '值13');
-INSERT INTO `dwd_sungrow.dwd_pub_user_org_d` (`user_account`, `user_name`, `user_type`, `crt_date`, `valid_flag`, `login_first_date`, `login_last_date`, `user_country`, `org_name`, `is_master_org`, `is_home_pv`, `login_times`, `login_web_times`, `login_app_times`, `pt`) VALUES ('值14', '值14', '值14', '2025-06-25 12:22:45', 14, '2024-10-03 12:22:45', '2025-06-13 12:22:45', '值14', '值14', 40, '值14', 603, 604, 846, '值14');
-INSERT INTO `dwd_sungrow.dwd_pub_user_org_d` (`user_account`, `user_name`, `user_type`, `crt_date`, `valid_flag`, `login_first_date`, `login_last_date`, `user_country`, `org_name`, `is_master_org`, `is_home_pv`, `login_times`, `login_web_times`, `login_app_times`, `pt`) VALUES ('值15', '值15', '值15', '2024-12-15 12:22:45', 15, '2024-12-19 12:22:45', '2024-10-07 12:22:45', '值15', '值15', 445, '值15', 349, 122, 69, '值15');
-INSERT INTO `dwd_sungrow.dwd_pub_user_org_d` (`user_account`, `user_name`, `user_type`, `crt_date`, `valid_flag`, `login_first_date`, `login_last_date`, `user_country`, `org_name`, `is_master_org`, `is_home_pv`, `login_times`, `login_web_times`, `login_app_times`, `pt`) VALUES ('值16', '值16', '值16', '2024-09-08 12:22:45', 16, '2024-09-08 12:22:45', '2025-01-15 12:22:45', '值16', '值16', 139, '值16', 676, 582, 234, '值16');
-INSERT INTO `dwd_sungrow.dwd_pub_user_org_d` (`user_account`, `user_name`, `user_type`, `crt_date`, `valid_flag`, `login_first_date`, `login_last_date`, `user_country`, `org_name`, `is_master_org`, `is_home_pv`, `login_times`, `login_web_times`, `login_app_times`, `pt`) VALUES ('值17', '值17', '值17', '2025-08-12 12:22:45', 17, '2025-01-11 12:22:45', '2025-01-02 12:22:45', '值17', '值17', 451, '值17', 286, 914, 813, '值17');
-INSERT INTO `dwd_sungrow.dwd_pub_user_org_d` (`user_account`, `user_name`, `user_type`, `crt_date`, `valid_flag`, `login_first_date`, `login_last_date`, `user_country`, `org_name`, `is_master_org`, `is_home_pv`, `login_times`, `login_web_times`, `login_app_times`, `pt`) VALUES ('值18', '值18', '值18', '2025-06-27 12:22:45', 18, '2025-01-14 12:22:45', '2025-03-06 12:22:45', '值18', '值18', 798, '值18', 338, 593, 156, '值18');
-INSERT INTO `dwd_sungrow.dwd_pub_user_org_d` (`user_account`, `user_name`, `user_type`, `crt_date`, `valid_flag`, `login_first_date`, `login_last_date`, `user_country`, `org_name`, `is_master_org`, `is_home_pv`, `login_times`, `login_web_times`, `login_app_times`, `pt`) VALUES ('值19', '值19', '值19', '2025-04-12 12:22:45', 19, '2025-01-04 12:22:45', '2025-06-17 12:22:45', '值19', '值19', 607, '值19', 715, 106, 522, '值19');
-INSERT INTO `dwd_sungrow.dwd_pub_user_org_d` (`user_account`, `user_name`, `user_type`, `crt_date`, `valid_flag`, `login_first_date`, `login_last_date`, `user_country`, `org_name`, `is_master_org`, `is_home_pv`, `login_times`, `login_web_times`, `login_app_times`, `pt`) VALUES ('值20', '值20', '值20', '2025-06-10 12:22:45', 20, '2025-06-18 12:22:45', '2025-05-05 12:22:45', '值20', '值20', 850, '值20', 191, 2, 989, '值20');
+-- 选择数据库
+USE dwd_sungrow;
 
--- 插入样例数据: dwd_sungrow.dwd_user_sys_user_version_info_d
-INSERT INTO `dwd_sungrow.dwd_user_sys_user_version_info_d` (`version_name`, `version_code`, `update_time`, `pt`) VALUES ('值1', '值1', '2024-10-21 12:22:45', '值1');
-INSERT INTO `dwd_sungrow.dwd_user_sys_user_version_info_d` (`version_name`, `version_code`, `update_time`, `pt`) VALUES ('值2', '值2', '2024-12-29 12:22:45', '值2');
-INSERT INTO `dwd_sungrow.dwd_user_sys_user_version_info_d` (`version_name`, `version_code`, `update_time`, `pt`) VALUES ('值3', '值3', '2025-03-22 12:22:45', '值3');
-INSERT INTO `dwd_sungrow.dwd_user_sys_user_version_info_d` (`version_name`, `version_code`, `update_time`, `pt`) VALUES ('值4', '值4', '2025-07-10 12:22:45', '值4');
-INSERT INTO `dwd_sungrow.dwd_user_sys_user_version_info_d` (`version_name`, `version_code`, `update_time`, `pt`) VALUES ('值5', '值5', '2025-01-18 12:22:45', '值5');
-INSERT INTO `dwd_sungrow.dwd_user_sys_user_version_info_d` (`version_name`, `version_code`, `update_time`, `pt`) VALUES ('值6', '值6', '2025-02-20 12:22:45', '值6');
-INSERT INTO `dwd_sungrow.dwd_user_sys_user_version_info_d` (`version_name`, `version_code`, `update_time`, `pt`) VALUES ('值7', '值7', '2025-07-15 12:22:45', '值7');
-INSERT INTO `dwd_sungrow.dwd_user_sys_user_version_info_d` (`version_name`, `version_code`, `update_time`, `pt`) VALUES ('值8', '值8', '2025-06-13 12:22:45', '值8');
-INSERT INTO `dwd_sungrow.dwd_user_sys_user_version_info_d` (`version_name`, `version_code`, `update_time`, `pt`) VALUES ('值9', '值9', '2024-09-10 12:22:45', '值9');
-INSERT INTO `dwd_sungrow.dwd_user_sys_user_version_info_d` (`version_name`, `version_code`, `update_time`, `pt`) VALUES ('值10', '值10', '2024-10-05 12:22:45', '值10');
-INSERT INTO `dwd_sungrow.dwd_user_sys_user_version_info_d` (`version_name`, `version_code`, `update_time`, `pt`) VALUES ('值11', '值11', '2025-02-28 12:22:45', '值11');
-INSERT INTO `dwd_sungrow.dwd_user_sys_user_version_info_d` (`version_name`, `version_code`, `update_time`, `pt`) VALUES ('值12', '值12', '2025-06-04 12:22:45', '值12');
-INSERT INTO `dwd_sungrow.dwd_user_sys_user_version_info_d` (`version_name`, `version_code`, `update_time`, `pt`) VALUES ('值13', '值13', '2025-01-08 12:22:45', '值13');
-INSERT INTO `dwd_sungrow.dwd_user_sys_user_version_info_d` (`version_name`, `version_code`, `update_time`, `pt`) VALUES ('值14', '值14', '2025-01-17 12:22:45', '值14');
-INSERT INTO `dwd_sungrow.dwd_user_sys_user_version_info_d` (`version_name`, `version_code`, `update_time`, `pt`) VALUES ('值15', '值15', '2024-08-30 12:22:45', '值15');
-INSERT INTO `dwd_sungrow.dwd_user_sys_user_version_info_d` (`version_name`, `version_code`, `update_time`, `pt`) VALUES ('值16', '值16', '2024-09-20 12:22:45', '值16');
-INSERT INTO `dwd_sungrow.dwd_user_sys_user_version_info_d` (`version_name`, `version_code`, `update_time`, `pt`) VALUES ('值17', '值17', '2025-06-12 12:22:45', '值17');
-INSERT INTO `dwd_sungrow.dwd_user_sys_user_version_info_d` (`version_name`, `version_code`, `update_time`, `pt`) VALUES ('值18', '值18', '2025-05-13 12:22:45', '值18');
-INSERT INTO `dwd_sungrow.dwd_user_sys_user_version_info_d` (`version_name`, `version_code`, `update_time`, `pt`) VALUES ('值19', '值19', '2025-06-16 12:22:45', '值19');
-INSERT INTO `dwd_sungrow.dwd_user_sys_user_version_info_d` (`version_name`, `version_code`, `update_time`, `pt`) VALUES ('值20', '值20', '2024-08-27 12:22:45', '值20');
+-- 插入用户组织数据
+INSERT INTO dwd_pub_user_org_d VALUES 
+('owner001', '张三', '业主', '2023-01-10 09:00:00', 1, '2023-01-15 08:30:00', '2024-01-14 17:45:00', '中国', '北京阳光能源有限公司', 1, '否', 156, 89, 67, '2024-01-15'),
+('owner002', '李四', '业主', '2023-02-15 10:30:00', 1, '2023-02-20 09:15:00', '2024-01-14 16:20:00', '中国', '上海绿能科技公司', 1, '否', 203, 125, 78, '2024-01-15'),
+('owner003', '王五', '业主', '2023-03-20 14:20:00', 1, '2023-03-25 10:45:00', '2024-01-14 19:30:00', '中国', '个人用户', 1, '是', 89, 34, 55, '2024-01-15'),
+('owner004', '赵六', '业主', '2023-04-25 11:15:00', 1, '2023-04-30 09:30:00', '2024-01-14 18:10:00', '中国', '深圳储能科技公司', 1, '否', 267, 156, 111, '2024-01-15'),
+('owner005', '孙七', '业主', '2023-05-30 16:45:00', 1, '2023-06-05 10:20:00', '2024-01-14 20:15:00', '中国', '杭州工商业集团', 1, '否', 178, 98, 80, '2024-01-15'),
+('owner006', '周八', '业主', '2023-06-15 13:25:00', 1, '2023-06-20 11:40:00', '2024-01-14 15:50:00', '中国', '成都新能源公司', 1, '否', 145, 82, 63, '2024-01-15'),
+('owner007', '吴九', '业主', '2023-07-08 10:15:00', 1, '2023-07-12 09:25:00', '2024-01-14 18:35:00', '中国', '个人用户', 1, '是', 67, 28, 39, '2024-01-15'),
+('owner008', '郑十', '业主', '2023-08-20 14:50:00', 1, '2023-08-25 12:10:00', '2024-01-14 19:20:00', '中国', '南京工业园区', 1, '否', 234, 145, 89, '2024-01-15'),
+('owner009', '王十一', '业主', '2023-09-12 11:30:00', 1, '2023-09-18 08:45:00', '2024-01-14 16:40:00', '中国', '青岛海洋能源', 1, '否', 189, 112, 77, '2024-01-15'),
+('owner010', '李十二', '业主', '2023-10-05 15:20:00', 1, '2023-10-10 13:15:00', '2024-01-14 17:55:00', '中国', '个人用户', 1, '是', 78, 35, 43, '2024-01-15'),
+('owner011', '陈十三', '业主', '2023-11-12 09:40:00', 1, '2023-11-18 10:25:00', '2024-01-14 16:15:00', '中国', '天津滨海能源', 1, '否', 123, 67, 56, '2024-01-15'),
+('owner012', '刘十四', '业主', '2023-12-08 14:30:00', 1, '2023-12-15 11:50:00', '2024-01-14 18:25:00', '中国', '重庆山城电力', 1, '否', 156, 89, 67, '2024-01-15'),
+('owner013', '黄十五', '业主', '2024-01-15 13:45:00', 1, '2024-01-20 12:30:00', '2024-01-14 19:40:00', '中国', '武汉光谷科技', 1, '否', 134, 78, 56, '2024-01-15'),
+('owner014', '林十六', '业主', '2024-02-20 16:20:00', 1, '2024-02-25 15:10:00', '2024-01-14 17:25:00', '中国', '长沙工业集团', 1, '否', 189, 112, 77, '2024-01-15'),
+('owner015', '何十七', '业主', '2024-03-18 11:35:00', 1, '2024-03-25 10:20:00', '2024-01-14 18:50:00', '中国', '个人用户', 1, '是', 67, 28, 39, '2024-01-15'),
+('owner016', '罗十八', '业主', '2024-04-22 14:15:00', 1, '2024-04-28 13:40:00', '2024-01-14 16:35:00', '中国', '石家庄新能源', 1, '否', 145, 82, 63, '2024-01-15'),
+('owner017', '宋十九', '业主', '2024-05-30 09:25:00', 1, '2024-06-05 08:15:00', '2024-01-14 19:15:00', '中国', '太原储能科技', 1, '否', 178, 98, 80, '2024-01-15'),
+('owner018', '唐二十', '业主', '2024-06-15 12:50:00', 1, '2024-06-20 11:35:00', '2024-01-14 17:40:00', '中国', '沈阳工业电力', 1, '否', 203, 125, 78, '2024-01-15'),
+('owner019', '韩二一', '业主', '2024-07-25 15:40:00', 1, '2024-07-30 14:25:00', '2024-01-14 18:55:00', '中国', '哈尔滨雪域能源', 1, '否', 123, 67, 56, '2024-01-15'),
+('owner020', '冯二二', '业主', '2024-08-12 10:15:00', 1, '2024-08-18 09:30:00', '2024-01-14 16:45:00', '中国', '长春汽车城电力', 1, '否', 167, 89, 78, '2024-01-15'),
+('owner021', '邓二三', '业主', '2024-09-20 13:25:00', 1, '2024-09-25 12:40:00', '2024-01-14 19:30:00', '中国', '兰州新区能源', 1, '否', 145, 82, 63, '2024-01-15'),
+('owner022', '许二四', '业主', '2024-10-15 16:35:00', 1, '2024-10-20 15:50:00', '2024-01-14 17:20:00', '中国', '银川光伏科技', 1, '否', 134, 78, 56, '2024-01-15'),
+('owner023', '曹二五', '业主', '2024-11-08 11:45:00', 1, '2024-11-15 10:30:00', '2024-01-14 18:40:00', '中国', '个人用户', 1, '是', 89, 34, 55, '2024-01-15'),
+('owner024', '袁二六', '业主', '2024-12-12 14:20:00', 1, '2024-12-18 13:15:00', '2024-01-14 16:25:00', '中国', '乌鲁木齐能源', 1, '否', 178, 98, 80, '2024-01-15'),
+('owner025', '蒋二七', '业主', '2025-01-05 09:30:00', 1, '2025-01-10 08:45:00', '2024-01-14 19:50:00', '中国', '拉萨高原电力', 1, '否', 156, 89, 67, '2024-01-15'),
+('owner026', '贾二八', '业主', '2025-02-18 12:40:00', 1, '2025-02-25 11:25:00', '2024-01-14 17:35:00', '中国', '海口椰风能源', 1, '否', 123, 67, 56, '2024-01-15'),
+('owner027', '薛二九', '业主', '2025-03-22 15:15:00', 1, '2025-03-28 14:30:00', '2024-01-14 18:20:00', '中国', '南宁绿城电力', 1, '否', 167, 89, 78, '2024-01-15'),
+('owner028', '严三十', '业主', '2025-04-10 10:50:00', 1, '2025-04-15 09:35:00', '2024-01-14 16:45:00', '中国', '个人用户', 1, '是', 78, 35, 43, '2024-01-15'),
+('owner029', '雷三一', '业主', '2025-05-25 13:20:00', 1, '2025-05-30 12:05:00', '2024-01-14 19:10:00', '中国', '贵阳山地能源', 1, '否', 189, 112, 77, '2024-01-15'),
+('owner030', '孔三二', '业主', '2025-06-18 16:40:00', 1, '2025-06-25 15:55:00', '2024-01-14 17:50:00', '中国', '昆明春城电力', 1, '否', 203, 125, 78, '2024-01-15'),
+('owner201', 'Hans Mueller', '业主', '2023-03-15 10:00:00', 1, '2023-03-20 08:15:00', '2024-01-14 16:30:00', '德国', 'Munich Solar GmbH', 1, '否', 134, 78, 56, '2024-01-15'),
+('owner202', 'Marie Dubois', '业主', '2023-04-20 14:30:00', 1, '2023-04-25 09:45:00', '2024-01-14 17:20:00', '法国', 'Paris Energy Solutions', 1, '否', 167, 89, 78, '2024-01-15'),
+('owner203', 'Giuseppe Rossi', '业主', '2023-05-25 11:20:00', 1, '2023-05-30 12:35:00', '2024-01-14 15:40:00', '意大利', 'Milano Green Energy', 1, '否', 145, 82, 63, '2024-01-15'),
+('owner204', 'Carlos Rodriguez', '业主', '2023-06-30 13:45:00', 1, '2023-07-05 14:20:00', '2024-01-14 18:15:00', '西班牙', 'Madrid Solar Power', 1, '否', 178, 98, 80, '2024-01-15'),
+('owner205', 'Erik Andersson', '业主', '2023-08-15 16:10:00', 1, '2023-08-20 15:25:00', '2024-01-14 19:35:00', '瑞典', 'Stockholm Green Tech', 1, '否', 156, 89, 67, '2024-01-15'),
+('owner206', 'Olaf Hansen', '业主', '2023-09-22 12:30:00', 1, '2023-09-28 11:45:00', '2024-01-14 16:50:00', '挪威', 'Oslo Renewable Energy', 1, '否', 189, 112, 77, '2024-01-15'),
+('owner207', 'Jan Kowalski', '业主', '2023-10-18 14:55:00', 1, '2023-10-25 13:40:00', '2024-01-14 17:25:00', '波兰', 'Warsaw Solar Solutions', 1, '否', 123, 67, 56, '2024-01-15'),
+('owner208', 'Petra Novak', '业主', '2023-11-25 09:20:00', 1, '2023-11-30 08:35:00', '2024-01-14 18:40:00', '捷克', 'Prague Energy Systems', 1, '否', 167, 89, 78, '2024-01-15'),
+('owner301', 'John Smith', '业主', '2023-06-10 13:45:00', 1, '2023-06-15 14:20:00', '2024-01-14 19:10:00', '澳大利亚', 'Sydney Solar Pty Ltd', 1, '否', 189, 112, 77, '2024-01-15'),
+('owner302', 'Sarah Johnson', '业主', '2023-07-18 16:15:00', 1, '2023-07-25 15:30:00', '2024-01-14 17:50:00', '澳大利亚', 'Melbourne Energy Co', 1, '否', 156, 89, 67, '2024-01-15'),
+('owner303', 'Michael Brown', '业主', '2023-08-25 11:40:00', 1, '2023-08-30 10:55:00', '2024-01-14 16:35:00', '澳大利亚', 'Brisbane Solar Tech', 1, '否', 145, 82, 63, '2024-01-15'),
+('owner304', 'Emma Wilson', '业主', '2023-09-30 14:25:00', 1, '2023-10-05 13:10:00', '2024-01-14 18:45:00', '澳大利亚', 'Perth Green Power', 1, '否', 178, 98, 80, '2024-01-15'),
+('owner305', 'James Davis', '业主', '2023-11-12 17:50:00', 1, '2023-11-18 16:35:00', '2024-01-14 19:20:00', '澳大利亚', 'Adelaide Renewables', 1, '否', 203, 125, 78, '2024-01-15'),
+('owner401', 'David Miller', '业主', '2023-07-20 12:15:00', 1, '2023-07-25 11:30:00', '2024-01-14 17:40:00', '美国', 'California Solar Inc', 1, '否', 234, 145, 89, '2024-01-15'),
+('owner402', 'Jennifer Garcia', '业主', '2023-08-28 15:40:00', 1, '2023-09-02 14:25:00', '2024-01-14 18:55:00', '美国', 'Texas Energy Solutions', 1, '否', 189, 112, 77, '2024-01-15'),
+('owner403', 'Robert Martinez', '业主', '2023-10-15 10:25:00', 1, '2023-10-20 09:40:00', '2024-01-14 16:30:00', '美国', 'Florida Solar Power', 1, '否', 167, 89, 78, '2024-01-15'),
+('owner404', 'Lisa Anderson', '业主', '2023-11-22 13:50:00', 1, '2023-11-28 12:35:00', '2024-01-14 19:15:00', '美国', 'New York Green Energy', 1, '否', 156, 89, 67, '2024-01-15'),
+('owner405', 'William Taylor', '业主', '2023-12-30 16:20:00', 1, '2024-01-05 15:05:00', '2024-01-14 17:25:00', '美国', 'Washington Solar Tech', 1, '否', 178, 98, 80, '2024-01-15'),
+('installer001', '安装商A', '安装商', '2023-01-05 08:00:00', 1, '2023-01-08 07:30:00', '2024-01-14 18:15:00', '中国', '华南安装服务公司', 1, '否', 445, 267, 178, '2024-01-15'),
+('installer002', '安装商B', '安装商', '2023-01-12 09:30:00', 1, '2023-01-15 08:45:00', '2024-01-14 17:00:00', '中国', '华东安装服务公司', 1, '否', 332, 198, 134, '2024-01-15'),
+('installer003', '安装商C', '安装商', '2023-02-08 13:20:00', 1, '2023-02-12 09:00:00', '2024-01-14 19:45:00', '中国', '华北安装服务公司', 1, '否', 289, 167, 122, '2024-01-15'),
+('installer004', '安装商D', '安装商', '2023-03-15 10:45:00', 1, '2023-03-20 11:30:00', '2024-01-14 16:25:00', '中国', '西南安装服务公司', 1, '否', 256, 145, 111, '2024-01-15'),
+('installer005', '安装商E', '安装商', '2023-04-22 14:10:00', 1, '2023-04-28 12:50:00', '2024-01-14 18:40:00', '中国', '华中安装服务公司', 1, '否', 198, 123, 75, '2024-01-15'),
+('installer006', '安装商F', '安装商', '2023-05-18 11:25:00', 1, '2023-05-25 10:40:00', '2024-01-14 17:30:00', '中国', '东北安装服务公司', 1, '否', 234, 145, 89, '2024-01-15'),
+('installer007', '安装商G', '安装商', '2023-06-20 15:35:00', 1, '2023-06-28 14:20:00', '2024-01-14 19:25:00', '中国', '西北安装服务公司', 1, '否', 278, 165, 113, '2024-01-15'),
+('installer008', '安装商H', '安装商', '2023-07-15 12:40:00', 1, '2023-07-22 11:55:00', '2024-01-14 16:50:00', '中国', '京津冀安装服务', 1, '否', 312, 189, 123, '2024-01-15'),
+('installer009', '安装商I', '安装商', '2023-08-25 09:15:00', 1, '2023-08-30 08:30:00', '2024-01-14 18:35:00', '中国', '长三角安装服务', 1, '否', 267, 156, 111, '2024-01-15'),
+('installer010', '安装商J', '安装商', '2023-09-30 16:50:00', 1, '2023-10-05 15:45:00', '2024-01-14 17:15:00', '中国', '珠三角安装服务', 1, '否', 245, 134, 111, '2024-01-15'),
+('installer101', 'Solar Install EU', '安装商', '2023-02-10 11:20:00', 1, '2023-02-15 10:45:00', '2024-01-14 16:55:00', '德国', 'European Solar Services', 1, '否', 278, 165, 113, '2024-01-15'),
+('installer102', 'Green Tech Install', '安装商', '2023-03-18 15:30:00', 1, '2023-03-25 14:15:00', '2024-01-14 18:20:00', '法国', 'French Installation Co', 1, '否', 234, 145, 89, '2024-01-15'),
+('installer103', 'Nordic Solar Services', '安装商', '2023-04-25 12:45:00', 1, '2023-04-30 11:30:00', '2024-01-14 17:40:00', '瑞典', 'Scandinavian Install', 1, '否', 289, 167, 122, '2024-01-15'),
+('installer104', 'Iberian Energy Install', '安装商', '2023-05-30 14:20:00', 1, '2023-06-05 13:35:00', '2024-01-14 19:25:00', '西班牙', 'Spanish Solar Install', 1, '否', 256, 145, 111, '2024-01-15'),
+('installer105', 'Alpine Solar Tech', '安装商', '2023-07-12 16:10:00', 1, '2023-07-18 15:25:00', '2024-01-14 18:50:00', '瑞士', 'Swiss Installation Co', 1, '否', 312, 189, 123, '2024-01-15'),
+('installer201', 'Aussie Solar Install', '安装商', '2023-05-12 12:40:00', 1, '2023-05-18 13:25:00', '2024-01-14 17:35:00', '澳大利亚', 'Australian Solar Services', 1, '否', 312, 189, 123, '2024-01-15'),
+('installer202', 'Pacific Solar Solutions', '安装商', '2023-06-20 14:55:00', 1, '2023-06-25 13:40:00', '2024-01-14 16:20:00', '澳大利亚', 'Oceanic Install Services', 1, '否', 267, 156, 111, '2024-01-15'),
+('installer203', 'Southern Cross Solar', '安装商', '2023-08-15 11:30:00', 1, '2023-08-20 10:45:00', '2024-01-14 18:15:00', '澳大利亚', 'Australian Energy Install', 1, '否', 234, 145, 89, '2024-01-15'),
+('installer301', 'American Solar Install', '安装商', '2023-06-25 13:15:00', 1, '2023-06-30 12:30:00', '2024-01-14 17:45:00', '美国', 'US Solar Services', 1, '否', 345, 201, 144, '2024-01-15'),
+('installer302', 'West Coast Solar', '安装商', '2023-07-30 15:40:00', 1, '2023-08-05 14:25:00', '2024-01-14 19:30:00', '美国', 'California Install Co', 1, '否', 298, 178, 120, '2024-01-15');
+
+-- 插入用户版本信息数据
+INSERT INTO dwd_user_sys_user_version_info_d VALUES 
+('iSolarCloud App', 'v3.2.1', '2024-01-10 10:30:00', '2024-01-15'),
+('iSolarCloud App', 'v3.2.0', '2024-01-08 14:20:00', '2024-01-15'),
+('iSolarCloud App', 'v3.1.9', '2024-01-05 16:45:00', '2024-01-15'),
+('iSolarCloud App', 'v3.1.8', '2024-01-03 11:15:00', '2024-01-15'),
+('iSolarCloud App', 'v3.1.7', '2024-01-01 09:30:00', '2024-01-15'),
+('iSolarCloud App', 'v3.1.6', '2023-12-28 13:45:00', '2024-01-15'),
+('iSolarCloud App', 'v3.1.5', '2023-12-25 15:20:00', '2024-01-15'),
+('iSolarCloud App', 'v3.1.4', '2023-12-22 17:10:00', '2024-01-15'),
+('iSolarCloud App', 'v3.1.3', '2023-12-20 12:35:00', '2024-01-15'),
+('iSolarCloud App', 'v3.1.2', '2023-12-18 14:50:00', '2024-01-15'),
+('iSolarCloud Web', 'v2.8.5', '2024-01-12 09:15:00', '2024-01-15'),
+('iSolarCloud Web', 'v2.8.4', '2024-01-09 11:30:00', '2024-01-15'),
+('iSolarCloud Web', 'v2.8.3', '2024-01-06 13:45:00', '2024-01-15'),
+('iSolarCloud Web', 'v2.8.2', '2024-01-04 16:20:00', '2024-01-15'),
+('iSolarCloud Web', 'v2.8.1', '2024-01-02 18:35:00', '2024-01-15'),
+('iSolarCloud Web', 'v2.8.0', '2023-12-30 10:50:00', '2024-01-15'),
+('iSolarCloud Web', 'v2.7.9', '2023-12-27 12:25:00', '2024-01-15'),
+('iSolarCloud Web', 'v2.7.8', '2023-12-24 14:40:00', '2024-01-15'),
+('iSolarCloud Web', 'v2.7.7', '2023-12-21 16:15:00', '2024-01-15'),
+('iSolarCloud Web', 'v2.7.6', '2023-12-19 11:30:00', '2024-01-15'),
+('Installer App', 'v2.1.3', '2024-01-11 13:45:00', '2024-01-15'),
+('Installer App', 'v2.1.2', '2024-01-07 15:20:00', '2024-01-15'),
+('Installer App', 'v2.1.1', '2024-01-04 17:10:00', '2024-01-15'),
+('Installer App', 'v2.1.0', '2024-01-01 19:25:00', '2024-01-15'),
+('Installer App', 'v2.0.9', '2023-12-29 21:40:00', '2024-01-15'),
+('Installer App', 'v2.0.8', '2023-12-26 08:15:00', '2024-01-15'),
+('Installer App', 'v2.0.7', '2023-12-23 10:30:00', '2024-01-15'),
+('Installer App', 'v2.0.6', '2023-12-20 12:45:00', '2024-01-15'),
+('Monitor Pro', 'v1.5.8', '2024-01-13 08:30:00', '2024-01-15'),
+('Monitor Pro', 'v1.5.7', '2024-01-06 12:15:00', '2024-01-15'),
+('Monitor Pro', 'v1.5.6', '2024-01-02 14:25:00', '2024-01-15'),
+('Monitor Pro', 'v1.5.5', '2023-12-30 16:40:00', '2024-01-15'),
+('Monitor Pro', 'v1.5.4', '2023-12-27 18:55:00', '2024-01-15'),
+('Monitor Pro', 'v1.5.3', '2023-12-24 09:10:00', '2024-01-15'),
+('Monitor Pro', 'v1.5.2', '2023-12-21 11:25:00', '2024-01-15'),
+('Monitor Pro', 'v1.5.1', '2023-12-18 13:40:00', '2024-01-15'),
+('EMS Control', 'v4.0.2', '2024-01-14 17:00:00', '2024-01-15'),
+('EMS Control', 'v4.0.1', '2024-01-11 19:30:00', '2024-01-15'),
+('EMS Control', 'v4.0.0', '2024-01-08 21:45:00', '2024-01-15'),
+('EMS Control', 'v3.9.9', '2024-01-05 07:20:00', '2024-01-15'),
+('EMS Control', 'v3.9.8', '2024-01-02 09:35:00', '2024-01-15'),
+('EMS Control', 'v3.9.7', '2023-12-30 11:50:00', '2024-01-15'),
+('EMS Control', 'v3.9.6', '2023-12-27 14:05:00', '2024-01-15'),
+('EMS Control', 'v3.9.5', '2023-12-24 16:20:00', '2024-01-15'),
+('Smart Meter', 'v2.3.1', '2024-01-13 16:20:00', '2024-01-15'),
+('Smart Meter', 'v2.3.0', '2024-01-10 18:35:00', '2024-01-15'),
+('Smart Meter', 'v2.2.9', '2024-01-07 20:50:00', '2024-01-15'),
+('Smart Meter', 'v2.2.8', '2024-01-04 08:15:00', '2024-01-15'),
+('Smart Meter', 'v2.2.7', '2024-01-01 10:30:00', '2024-01-15'),
+('Smart Meter', 'v2.2.6', '2023-12-29 12:45:00', '2024-01-15'),
+('Data Logger', 'v1.8.5', '2024-01-12 20:15:00', '2024-01-15'),
+('Data Logger', 'v1.8.4', '2024-01-09 22:40:00', '2024-01-15'),
+('Data Logger', 'v1.8.3', '2024-01-06 07:25:00', '2024-01-15'),
+('Data Logger', 'v1.8.2', '2024-01-03 09:40:00', '2024-01-15'),
+('Data Logger', 'v1.8.1', '2023-12-31 11:55:00', '2024-01-15'),
+('Data Logger', 'v1.8.0', '2023-12-28 14:10:00', '2024-01-15'),
+('Battery Monitor', 'v3.1.2', '2024-01-11 15:25:00', '2024-01-15'),
+('Battery Monitor', 'v3.1.1', '2024-01-08 17:40:00', '2024-01-15'),
+('Battery Monitor', 'v3.1.0', '2024-01-05 19:55:00', '2024-01-15'),
+('Battery Monitor', 'v3.0.9', '2024-01-02 06:10:00', '2024-01-15'),
+('Weather Station', 'v2.4.3', '2024-01-10 08:25:00', '2024-01-15'),
+('Weather Station', 'v2.4.2', '2024-01-07 10:40:00', '2024-01-15'),
+('Weather Station', 'v2.4.1', '2024-01-04 12:55:00', '2024-01-15'),
+('Weather Station', 'v2.4.0', '2024-01-01 15:10:00', '2024-01-15');
