@@ -612,13 +612,38 @@ export const getDefaultPrompt = async () => {
   try {
     const fs = require('fs');
     const path = require('path');
+    
+    console.log('__dirname:', __dirname);
+    console.log('process.cwd():', process.cwd());
+    
     // 使用相对于当前文件的路径，确保在容器环境中也能正确定位
     const localPath = path.resolve(__dirname, '../../demo/defaultDragonPrompt.json');
+    console.log('Checking local path:', localPath);
     
-    if (fs.existsSync(localPath)) {
+    const fileExists = fs.existsSync(localPath);
+    console.log('File exists:', fileExists);
+    
+    if (fileExists) {
       const fileContent = fs.readFileSync(localPath, 'utf8');
       console.log('Loaded default prompts from local demo directory:', localPath);
       return JSON.parse(fileContent);
+    } else {
+      console.log('Local file not found, trying alternative paths...');
+      // 尝试其他可能的路径
+      const altPaths = [
+        path.resolve(process.cwd(), 'demo/defaultDragonPrompt.json'),
+        path.resolve(__dirname, '../../../demo/defaultDragonPrompt.json'),
+        './demo/defaultDragonPrompt.json'
+      ];
+      
+      for (const altPath of altPaths) {
+        console.log('Trying alternative path:', altPath);
+        if (fs.existsSync(altPath)) {
+          const fileContent = fs.readFileSync(altPath, 'utf8');
+          console.log('Loaded default prompts from alternative path:', altPath);
+          return JSON.parse(fileContent);
+        }
+      }
     }
   } catch (error) {
     console.log('Failed to load from local demo directory:', error);
