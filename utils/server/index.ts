@@ -607,8 +607,26 @@ const resolveBody = async (respone: any) => {
 };
 
 export const getDefaultPrompt = async () => {
+  // 优先尝试从本地demo目录加载
+  try {
+    const fs = require('fs');
+    const path = require('path');
+    // 使用相对于当前文件的路径，确保在容器环境中也能正确定位
+    const localPath = path.resolve(__dirname, '../../demo/defaultDragonPrompt.json');
+    
+    if (fs.existsSync(localPath)) {
+      const fileContent = fs.readFileSync(localPath, 'utf8');
+      console.log('Loaded default prompts from local demo directory:', localPath);
+      return JSON.parse(fileContent);
+    }
+  } catch (error) {
+    console.log('Failed to load from local demo directory:', error);
+  }
+  
+  // 本地加载失败时从S3加载
+  console.log('Loading default prompts from S3');
   return await getS3JsonFile(EXAMPLE_FILE_NAME);
-};
+};}
 
 const bedrockInsghtStream = async (
   messages: Message[],
