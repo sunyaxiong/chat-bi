@@ -71,7 +71,7 @@ def query(questions:list, bedrock_client):
     if is_claude_37:
         # Claude 3.7参数格式
         native_request = {
-            "anthropic_version": "bedrock-2024-10-31",
+            "anthropic_version": "bedrock-2023-05-31",
             "max_tokens": int(os.environ.get('BEDROCK_MAX_TOKEN', '20480')),
             "temperature": 0,
             "messages": questions
