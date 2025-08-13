@@ -610,8 +610,8 @@ const resolveBody = async (respone: any) => {
 export const getDefaultPrompt = async () => {
   // 优先尝试从本地demo目录加载
   try {
-    const fs = require('fs');
-    const path = require('path');
+    const fs = await import('fs');
+    const path = await import('path');
     
     console.log('__dirname:', __dirname);
     console.log('process.cwd():', process.cwd());
