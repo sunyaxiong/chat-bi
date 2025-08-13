@@ -626,7 +626,7 @@ export const getDefaultPrompt = async () => {
   // 本地加载失败时从S3加载
   console.log('Loading default prompts from S3');
   return await getS3JsonFile(EXAMPLE_FILE_NAME);
-};}
+};
 
 const bedrockInsghtStream = async (
   messages: Message[],
