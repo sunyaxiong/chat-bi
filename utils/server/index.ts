@@ -13,7 +13,8 @@ import {
   RAG_FILE_NAME,
   RAG_SEARCH_LENGHT,
   SECRET_ACCESS_KEY,
-  DEFAULT_MODEL_NAME
+  DEFAULT_MODEL_NAME,
+  S3_REGION
 } from '../app/const';
 import { queryHiveResult } from './hive';
 import { searchMySQLResult } from './mysql';
@@ -829,23 +830,26 @@ const getS3JsonFile = async (fileName: string | undefined) => {
       Bucket: BUCKET_NAME,
       Key: fileName,
     };
-    const s3Client = new S3Client(AWS_PARAM);
+    // 使用S3专用的region配置
+    const s3AwsParam = {
+      ...AWS_PARAM,
+      region: S3_REGION || DEFAULT_REGION
+    };
+    const s3Client = new S3Client(s3AwsParam);
     const command = new GetObjectCommand(getObjectParams);
     const fileInfo: any = await s3Client.send(command);
     let fileResultStr = '';
     for await (const chunk of fileInfo.Body as any) {
       const buffer = Buffer.from(chunk);
-      // 将 Buffer 对象转换为字符串
-      const convertedString: any = buffer.toString('utf8'); // 使用 'utf8' 编码
+      const convertedString: any = buffer.toString('utf8');
       if (convertedString) {
         fileResultStr += convertedString;
       }
     }
-    console.log('====>> ')
-    console.log(JSON.parse(fileResultStr))
+    console.log('S3 file loaded from region:', S3_REGION || DEFAULT_REGION);
     return JSON.parse(fileResultStr);
   } catch (error) {
-    console.log('getS3JsonFile', error);
+    console.log('getS3JsonFile error:', error);
     return [];
   }
 };

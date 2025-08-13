@@ -36,6 +36,8 @@ export const HIVE_USER = process.env.HIVE_USER;
 export const HIVE_PWD = process.env.HIVE_PWD;
 export const BUCKET_NAME = process.env.BUCKET_NAME;
 
+export const S3_REGION = process.env.S3_REGION;
+
 export const BACK_USER_POOL_ID = process.env.BACK_USER_POOL_ID;
 
 export const BACK_USER_CLIENT_ID = process.env.BACK_USER_CLIENT_ID;
