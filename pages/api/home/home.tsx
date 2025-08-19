@@ -553,13 +553,18 @@ export const getServerSideProps: GetServerSideProps = async ({ locale, query }) 
 
   // 检查是否有token参数
   const token = query.token as string;
-  let tokenAuth = false;
 
   if (token) {
     // 验证token
     const expectedToken = process.env.ACCESS_TOKEN;
     if (token === expectedToken) {
-      tokenAuth = true;
+      // token验证成功，设置session并重定向到首页隐藏token
+      return {
+        redirect: {
+          destination: '/?auth=success',
+          permanent: false,
+        },
+      };
     } else {
       // token无效，返回错误页面
       return {
@@ -582,12 +587,15 @@ export const getServerSideProps: GetServerSideProps = async ({ locale, query }) 
     }
   }
 
+  // 检查是否是token验证成功后的重定向
+  const authSuccess = query.auth === 'success';
+
   return {
     props: {
       serverSideApiKeyIsSet: !!process.env.OPENAI_API_KEY,
       defaultModelId,
       serverSidePluginKeysSet,
-      tokenAuth,
+      tokenAuth: authSuccess,
       ...(await serverSideTranslations(locale ?? 'en', [
         'common',
         'chat',
