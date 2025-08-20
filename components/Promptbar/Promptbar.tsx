@@ -99,36 +99,44 @@ const Promptbar = () => {
     if (prompts && prompts.length > 0) {
       return;
     }
-    const response = await fetch('/api/getDefaultPrompt', {
-      method: 'GET',
-    });
-    const result = await response.json();
-    if (!result || !Array.isArray(result) || result.length === 0) {
-      return;
-    }
-    const newPrompt: {
-      id: string;
-      name: string;
-      description: string;
-      content: string;
-      folderId: null;
-    }[] = [];
-    result.forEach((item: any) => {
-      if (!item) {
+    await refreshDefaultPrompts();
+  };
+
+  const refreshDefaultPrompts = async () => {
+    try {
+      const response = await fetch('/api/getDefaultPrompt', {
+        method: 'GET',
+      });
+      const result = await response.json();
+      if (!result || !Array.isArray(result) || result.length === 0) {
         return;
       }
-      newPrompt.push({
-        id: uuidv4(),
-        name: item.name,
-        description: item.description,
-        content: item.content,
-        folderId: null,
+      
+      // 移除旧的预制提示词（id以default-开头的）
+      const userPrompts = prompts.filter(p => !p.id.startsWith('default-'));
+      
+      const newPrompts: Prompt[] = [];
+      result.forEach((item: any, index: number) => {
+        if (!item) {
+          return;
+        }
+        newPrompts.push({
+          id: `default-${index}`,
+          name: item.name,
+          description: item.description || '',
+          content: item.content,
+          folderId: null,
+        });
       });
-    });
-    const updatedPrompts = [...prompts, ...newPrompt];
-    homeDispatch({ field: 'prompts', value: updatedPrompts });
-
-    savePrompts(updatedPrompts);
+      
+      const updatedPrompts = [...userPrompts, ...newPrompts];
+      homeDispatch({ field: 'prompts', value: updatedPrompts });
+      savePrompts(updatedPrompts);
+      
+      console.log('预制提示词已刷新');
+    } catch (error) {
+      console.error('Failed to refresh default prompts:', error);
+    }
   };
 
   useEffect(() => {
@@ -179,6 +187,17 @@ const Promptbar = () => {
         handleCreateItem={handleCreatePrompt}
         handleCreateFolder={() => handleCreateFolder(t('New folder'), 'prompt')}
         handleDrop={handleDrop}
+        footerComponent={
+          <button
+            className="flex w-full cursor-pointer select-none items-center gap-3 rounded-md py-2 px-3 text-[14px] leading-3 text-white transition-colors duration-200 hover:bg-gray-500/10"
+            onClick={refreshDefaultPrompts}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            刷新预制提示词
+          </button>
+        }
       />
     </PromptbarContext.Provider>
   );

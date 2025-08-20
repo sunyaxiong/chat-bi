@@ -147,6 +147,8 @@ const Home = ({
   tokenError,
 }: Props) => {
   const { t } = useTranslation('chat');
+  const [isTokenVerifying, setIsTokenVerifying] = useState(false);
+  const [tokenAuthSuccess, setTokenAuthSuccess] = useState(tokenAuth);
 
   const contextValue = useCreateReducer<HomeInitialState>({
     initialState,
@@ -194,6 +196,40 @@ const Home = ({
       setCognitoConfig();
     };
   }, []);
+
+  // Token验证逻辑
+  useEffect(() => {
+    const verifyUrlToken = async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const token = urlParams.get('token');
+      
+      if (token && !tokenAuthSuccess) {
+        setIsTokenVerifying(true);
+        
+        try {
+          const response = await fetch('/api/auth/verify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token }),
+          });
+          
+          if (response.ok) {
+            setTokenAuthSuccess(true);
+            // 删除URL中的token参数
+            const newUrl = new URL(window.location.href);
+            newUrl.searchParams.delete('token');
+            window.history.replaceState({}, '', newUrl.pathname + newUrl.search);
+          }
+        } catch (error) {
+          console.error('Token verification failed:', error);
+        } finally {
+          setIsTokenVerifying(false);
+        }
+      }
+    };
+    
+    verifyUrlToken();
+  }, [tokenAuthSuccess]);
 
   // FETCH MODELS ----------------------------------------------
 
@@ -372,10 +408,40 @@ const Home = ({
       dispatch({ field: 'folders', value: JSON.parse(folders) });
     }
 
-    const prompts = localStorage.getItem('prompts');
-    if (prompts) {
-      dispatch({ field: 'prompts', value: JSON.parse(prompts) });
-    }
+    // 动态加载预制提示词
+    const loadDefaultPrompts = async () => {
+      try {
+        const response = await fetch('/api/getDefaultPrompt');
+        if (response.ok) {
+          const defaultPrompts = await response.json();
+          const formattedPrompts = defaultPrompts.map((item: any, index: number) => ({
+            id: `default-${index}`,
+            name: item.name,
+            description: item.description || '',
+            content: item.content,
+            folderId: null,
+          }));
+          dispatch({ field: 'prompts', value: formattedPrompts });
+          // 保存到localStorage作为缓存
+          localStorage.setItem('prompts', JSON.stringify(formattedPrompts));
+        } else {
+          // API失败时使用localStorage缓存
+          const prompts = localStorage.getItem('prompts');
+          if (prompts) {
+            dispatch({ field: 'prompts', value: JSON.parse(prompts) });
+          }
+        }
+      } catch (error) {
+        console.error('Failed to load default prompts:', error);
+        // 错误时使用localStorage缓存
+        const prompts = localStorage.getItem('prompts');
+        if (prompts) {
+          dispatch({ field: 'prompts', value: JSON.parse(prompts) });
+        }
+      }
+    };
+    
+    loadDefaultPrompts();
 
     const conversationHistory = localStorage.getItem('conversationHistory');
     if (conversationHistory) {
@@ -433,8 +499,21 @@ const Home = ({
     );
   }
 
+  // Token验证中显示加载状态
+  if (isTokenVerifying) {
+    return (
+      <div className="flex h-screen w-screen items-center justify-center bg-gray-100">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <h1 className="text-xl font-semibold text-gray-800 mb-2">正在验证访问权限</h1>
+          <p className="text-gray-600">请稍候...</p>
+        </div>
+      </div>
+    );
+  }
+
   // Token验证成功时直接显示应用界面
-  if (tokenAuth) {
+  if (tokenAuthSuccess) {
     return (
       <HomeContext.Provider
         value={{
@@ -445,7 +524,11 @@ const Home = ({
           handleUpdateFolder,
           handleSelectConversation,
           handleUpdateConversation,
-          signOut: () => { localStorage.clear(); alert('会话已结束'); },
+          signOut: async () => { 
+            await fetch('/api/auth/logout', { method: 'POST' });
+            localStorage.clear(); 
+            window.location.reload();
+          },
           user: { username: 'token-user' },
         }}
       >
@@ -547,55 +630,37 @@ const Home = ({
 };
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = async ({ locale, query }) => {
+export const getServerSideProps: GetServerSideProps = async ({ locale, query, req }) => {
   const defaultModelId = 'Amazon_bedrock';
   let serverSidePluginKeysSet = false;
 
-  // 检查是否有token参数
-  const token = query.token as string;
+  // Token验证在前端处理
 
-  if (token) {
-    // 验证token
-    const expectedToken = process.env.ACCESS_TOKEN;
-    if (token === expectedToken) {
-      // token验证成功，设置session并重定向到首页隐藏token
-      return {
-        redirect: {
-          destination: '/?auth=success',
-          permanent: false,
-        },
-      };
-    } else {
-      // token无效，返回错误页面
-      return {
-        props: {
-          serverSideApiKeyIsSet: !!process.env.OPENAI_API_KEY,
-          defaultModelId,
-          serverSidePluginKeysSet,
-          tokenAuth: false,
-          tokenError: 'Invalid token',
-          ...(await serverSideTranslations(locale ?? 'en', [
-            'common',
-            'chat',
-            'sidebar',
-            'markdown',
-            'promptbar',
-            'settings',
-          ])),
-        },
-      };
+  // 检查会话状态
+  const sessionCookie = req.cookies.session;
+  let tokenAuth = false;
+
+  if (sessionCookie) {
+    try {
+      const jwt = await import('jsonwebtoken');
+      const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+      const decoded = jwt.verify(sessionCookie, JWT_SECRET) as any;
+      
+      if (decoded.authenticated && decoded.exp > Math.floor(Date.now() / 1000)) {
+        tokenAuth = true;
+      }
+    } catch (error) {
+      // JWT验证失败
+      tokenAuth = false;
     }
   }
-
-  // 检查是否是token验证成功后的重定向
-  const authSuccess = query.auth === 'success';
 
   return {
     props: {
       serverSideApiKeyIsSet: !!process.env.OPENAI_API_KEY,
       defaultModelId,
       serverSidePluginKeysSet,
-      tokenAuth: authSuccess,
+      tokenAuth,
       ...(await serverSideTranslations(locale ?? 'en', [
         'common',
         'chat',

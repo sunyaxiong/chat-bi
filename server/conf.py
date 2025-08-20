@@ -91,11 +91,11 @@ def get_mysql_conf_by_question(question:str)->list:
         if question.find(desc_info)>=0:
             return [all_datasources[key]]
     
-    # 如果没找到匹配的，优先返回MySQL数据源（向下兼容）
-    if mysql_info:
-        return [mysql_info[key] for key in mysql_info]
-    elif spark_info:
+    # 如果没找到匹配的，优先返图Spark数据源
+    if spark_info:
         return [spark_info[key] for key in spark_info]
+    elif mysql_info:
+        return [mysql_info[key] for key in mysql_info]
     else:
         return []
 

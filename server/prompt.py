@@ -5,6 +5,7 @@ from . import aws
 from . import conf
 
 _prompt_cache = dict()
+_cache_timestamps = dict()  # 记录文件时间戳
 
 # 从 S3 读取 JSON 文件
 def read_conf_from_s3(s3_client, bucket, key):
@@ -19,9 +20,32 @@ def read_conf_from_s3(s3_client, bucket, key):
         return None
 
 def get(file_key)->dict:
-    if len(_prompt_cache) != 0:
-        return _prompt_cache[file_key]
+    # 检查是否需要刷新缓存
+    if _should_refresh_cache():
+        refresh_cache()
+    
+    if len(_prompt_cache) == 0:
+        refresh_cache()
+        
+    return _prompt_cache.get(file_key, {})
 
+def _should_refresh_cache()->bool:
+    """检查是否需要刷新缓存"""
+    for item in ['EXAMPLE_FILE_NAME', 'PROMPT_FILE_NAME', 'RAG_FILE_NAME']:
+        key = os.environ[item]
+        if os.path.exists(key):
+            current_mtime = os.path.getmtime(key)
+            cached_mtime = _cache_timestamps.get(item, 0)
+            if current_mtime > cached_mtime:
+                return True
+    return False
+
+def refresh_cache():
+    """刷新缓存"""
+    global _prompt_cache, _cache_timestamps
+    _prompt_cache.clear()
+    _cache_timestamps.clear()
+    
     for item in ['EXAMPLE_FILE_NAME', 'PROMPT_FILE_NAME', 'RAG_FILE_NAME']:
         key = os.environ[item]
         
@@ -30,7 +54,8 @@ def get(file_key)->dict:
             try:
                 with open(key, 'r', encoding='utf-8') as f:
                     json_data = json.load(f)
-                print(f"Loaded {item} from local file: {key}")
+                _cache_timestamps[item] = os.path.getmtime(key)
+                print(f"Refreshed {item} from local file: {key}")
             except Exception as e:
                 print(f"Error reading local file {key}: {e}")
                 json_data = None
@@ -49,8 +74,6 @@ def get(file_key)->dict:
                 json_data = {}
                 
         _prompt_cache[item] = json_data
-
-    return _prompt_cache[file_key]
 
 def template_fix_query_error(fmtsql:str, error_str:str):
     p = f"""
