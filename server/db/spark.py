@@ -17,28 +17,42 @@ class HiveSparkConnector:
         self._init_spark_session()
     
     def _init_spark_session(self):
-        """初始化Spark会话"""
+        """初始化Spark会话（使用已验证的配置）"""
         try:
             from pyspark.sql import SparkSession
-            from pyspark.conf import SparkConf
             
-            conf = SparkConf()
-            conf.set("spark.sql.warehouse.dir", os.getenv("SPARK_WAREHOUSE_DIR", ""))
-            conf.set("hive.metastore.uris", os.getenv("HIVE_METASTORE_URI", ""))
-            conf.set("spark.sql.adaptive.enabled", "true")
-            conf.set("spark.sql.adaptive.coalescePartitions.enabled", "true")
-            conf.set("spark.executor.memory", os.getenv("SPARK_EXECUTOR_MEMORY", "4g"))
-            conf.set("spark.executor.cores", os.getenv("SPARK_EXECUTOR_CORES", "2"))
-            conf.set("spark.driver.maxResultSize", os.getenv("SPARK_MAX_RESULT_SIZE", "2g"))
+            hudi_jar_path = "/soft/text2sql-new/hudi-spark3.2-bundle_2.12-0.12.1.jar"
+            juicefs_jar_path = "/soft/spark3.2.3/jars/juicefs-hadoop-1.1.1.jar"
             
             self.spark = SparkSession.builder \
-                .appName(os.getenv("SPARK_APP_NAME", "ChatBI-Hive-Spark")) \
-                .master(os.getenv("SPARK_MASTER", "local[*]")) \
-                .config(conf=conf) \
+                .appName("ChatBI-Hudi-DataLake") \
+                .master("yarn") \
+                .config("spark.submit.deployMode", "client") \
+                .config("spark.executor.instances", "10") \
+                .config("spark.executor.cores", "2") \
+                .config("spark.executor.memory", "4G") \
+                .config("spark.driver.memory", "10G") \
+                .config("spark.dynamicAllocation.enabled", "false") \
+                .config("spark.yarn.queue", "plat") \
+                .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer") \
+                .config("spark.jars", f"{hudi_jar_path},{juicefs_jar_path}") \
+                .config("hoodie.metadata.enable", "false") \
+                .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.hudi.catalog.HoodieCatalog") \
+                .config("spark.sql.extensions", "org.apache.spark.sql.hudi.HoodieSparkSessionExtension") \
+                .config("spark.hadoop.fs.defaultFS", "hdfs://mycluster") \
+                .config("spark.hadoop.hive.metastore.uris", "thrift://pub:9083,thrift://dap1:9083,thrift://dap2:9083") \
+                .config("spark.sql.warehouse.dir", "/user/hive/warehouse") \
+                .config("spark.hadoop.javax.jdo.option.ConnectionURL", "jdbc:mysql://pc-bp1ce98fkgxnic8yu.mysql.polardb.rds.aliyuncs.com:3306/hive?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false") \
+                .config("spark.hadoop.javax.jdo.option.ConnectionDriverName", "com.mysql.jdbc.Driver") \
+                .config("spark.hadoop.javax.jdo.option.ConnectionUserName", "su") \
+                .config("spark.hadoop.javax.jdo.option.ConnectionPassword", "Sungrow2011") \
+                .config("spark.hadoop.hive.metastore.schema.verification", "false") \
+                .config("spark.sql.hive.metastore.jars", "/soft/hive-3.1.2/lib/*") \
+                .config("spark.sql.hive.metastore.version", "3.1.2") \
                 .enableHiveSupport() \
                 .getOrCreate()
                 
-            logger.info("Spark session initialized successfully")
+            logger.info("Spark session initialized successfully with verified configuration")
             
         except ImportError:
             logger.error("PySpark not installed. Please install: pip install pyspark")
@@ -139,7 +153,7 @@ class HiveSparkConnector:
             logger.info("Spark session closed")
 
 
-def get_spark_conn(host: str, port: int, user: str, pwd: str, database: str):
+def get_conn(host: str, port: int, user: str, pwd: str, database: str):
     """
     获取Spark连接（兼容MySQL接口）
     

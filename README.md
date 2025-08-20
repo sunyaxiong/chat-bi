@@ -83,6 +83,13 @@ python prompt_gen.py template --scenario ecommerce --tables order_detail users g
 ```
 如果这个场景是使用者默认查询最多查询场景，则修改ecommerce.xlsx 为 ecommerce_default.xlsx
 
+### 生成spark模板
+python spark_prompt_gen.py template --scenario "电力设备" --tables ods_mysql_power_device --database ods_sungrow
+
+### 生成spark prompt（需要先人工review模板）
+python spark_prompt_gen.py prompt
+
+
 3. 你也可以打开该提示词模板文件，根据你对业务的了解进一步的审核和修改. 
 这里有一个使用demo数据生成的提示词模板，你可以下载下来参考
 ```
